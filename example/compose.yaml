@@ -15,7 +15,7 @@ services:
     environment:
       - TZ=${TZ:-UTC}
       - FTLCONF_webserver_api_password=${WEBPASSWORD}
-      - FTLCONF_webserver_interface_theme=${WEBTHEME:-default-light}
+      - FTLCONF_webserver_interface_theme=${WEBTHEME:-default-dark}
       - FTLCONF_dns_revServers=${REV_SERVER:-false},${REV_SERVER_CIDR},${REV_SERVER_TARGET},${REV_SERVER_DOMAIN}
       - FTLCONF_dns_upstreams=127.0.0.1#5335
       - FTLCONF_dns_dnssec="true"
