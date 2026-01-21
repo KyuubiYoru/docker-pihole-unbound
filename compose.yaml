@@ -9,7 +9,7 @@ services:
     hostname: ${HOSTNAME}
     domainname: ${DOMAIN_NAME}
     ports:
-      - 443:443/tcp
+      - 8443:443/tcp
       - 53:53/tcp
       - 53:53/udp
       - ${PIHOLE_WEBPORT:-80}:80/tcp #Allows use of different port to access pihole web interface when other docker containers use port 80
@@ -23,7 +23,6 @@ services:
       - FTLCONF_dns_upstreams=127.0.0.1#5335
       - FTLCONF_dns_dnssec="true"
       - FTLCONF_dns_listeningMode=single
-      - FTLCONF_webserver_port=${PIHOLE_WEBPORT}
     volumes:
       - etc_pihole-unbound:/etc/pihole:rw
       - etc_pihole_dnsmasq-unbound:/etc/dnsmasq.d:rw
