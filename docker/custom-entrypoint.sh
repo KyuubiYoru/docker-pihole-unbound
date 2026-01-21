@@ -4,6 +4,9 @@
 mkdir -p /var/log/unbound
 chown pihole:pihole /var/log/unbound
 
+# Copy custom dnsmasq configs (volume mount overrides Dockerfile COPY)
+cp /05-custom-dns.conf /etc/dnsmasq.d/05-custom-dns.conf 2>/dev/null || true
+
 # Ensure DNSSEC root trust anchor exists
 echo "  [i] Updating DNSSEC root trust anchor"
 mkdir -p /var/lib/unbound
