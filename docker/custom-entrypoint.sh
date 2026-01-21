@@ -4,6 +4,12 @@
 mkdir -p /var/log/unbound
 chown pihole:pihole /var/log/unbound
 
+# Ensure DNSSEC root trust anchor exists
+echo "  [i] Updating DNSSEC root trust anchor"
+mkdir -p /var/lib/unbound
+unbound-anchor -a /var/lib/unbound/root.key || true
+chown -R unbound:unbound /var/lib/unbound
+
 # Start Unbound with error checking
 echo "  [i] Starting Unbound"
 /usr/sbin/unbound -d -c /etc/unbound/unbound.conf.d/pi-hole.conf &
