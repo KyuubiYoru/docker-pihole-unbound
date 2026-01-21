@@ -57,6 +57,37 @@ WEBTHEME=default-light
 WEB_PORT=80
 ```
 
+## Cache Warming
+
+The image includes a `warm-cache` script that keeps frequently-used domains fresh in Unbound's cache. It queries the Pi-hole FTL database for top domains from recent queries and pre-fetches them.
+
+### Manual Usage
+
+```bash
+# Run inside the container
+docker exec pihole-unbound warm-cache
+
+# Or with custom settings
+docker exec pihole-unbound sh -c "WARM_CACHE_DAYS=7 WARM_CACHE_MAX=1000 warm-cache"
+```
+
+### Automated via Cron (Host)
+
+Add to your host's crontab to run periodically:
+
+```bash
+# Warm cache every 6 hours
+0 */6 * * * docker exec pihole-unbound warm-cache > /dev/null 2>&1
+```
+
+### Configuration
+
+| Variable | Default | Description |
+| -------- | ------- | ----------- |
+| `WARM_CACHE_DAYS` | `3` | Look back period for domain history |
+| `WARM_CACHE_MAX` | `500` | Maximum number of domains to warm |
+| `WARM_CACHE_DELAY_MS` | `10` | Delay between queries (milliseconds) |
+
 ## Filing Issues
 
 Please file issues as follows:
